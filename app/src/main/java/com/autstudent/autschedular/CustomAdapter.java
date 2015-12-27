@@ -1,6 +1,7 @@
 package com.autstudent.autschedular;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,11 @@ import java.util.List;
  * Created by wilzo on 26/12/2015.
  */
 public class CustomAdapter extends ArrayAdapter {
-    private Activity activity;
+    private Context activity;
     private List<String> title;
 
 
-    public CustomAdapter(Activity context, int resource, List<String> Title) {
+    public CustomAdapter(Context context, int resource, List<String> Title) {
         super(context, resource, Title);
         this.activity = context;
         this.title = Title;
@@ -29,7 +30,7 @@ public class CustomAdapter extends ArrayAdapter {
         ViewHolder view;
         if (rowView == null) {
             // Get a new instance of the row layout view
-            LayoutInflater inflater = activity.getLayoutInflater();
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(R.layout.custom_row_layout, null);
             // Hold the view objects in an object, that way the don't need to be "re- finded"
             view = new ViewHolder();
