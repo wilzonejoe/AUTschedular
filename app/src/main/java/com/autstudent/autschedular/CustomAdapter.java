@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -15,13 +18,13 @@ import java.util.List;
  */
 public class CustomAdapter extends ArrayAdapter {
     private Context activity;
-    private List<String> title;
+    private List<ParseObject> objects;
 
 
-    public CustomAdapter(Context context, int resource, List<String> Title) {
-        super(context, resource, Title);
+    public CustomAdapter(Context context, int resource, List<ParseObject> objects) {
+        super(context, resource, objects);
         this.activity = context;
-        this.title = Title;
+        this.objects= objects;
     }
 
     @Override
@@ -42,8 +45,34 @@ public class CustomAdapter extends ArrayAdapter {
         }
         /** Set data to your Views. */
 
-        view.title.setText(title.get(position));
-        view.details.setText(title.get(position));
+        String day = "Sunday";
+        int dayCode = Integer.parseInt(objects.get(position).get("Day").toString());
+        switch (dayCode){
+            case Calendar.MONDAY:
+                day = "Monday";
+                break;
+            case Calendar.TUESDAY:
+                day = "Tuesday";
+                break;
+            case Calendar.WEDNESDAY:
+                day = "Wednesday";
+                break;
+            case Calendar.THURSDAY:
+                day = "Thursday";
+                break;
+            case Calendar.FRIDAY:
+                day = "Friday";
+                break;
+            case Calendar.SATURDAY:
+                day = "Saturday";
+                break;
+            case Calendar.SUNDAY:
+                day = "Sunday";
+                break;
+        }
+
+        view.title.setText(day);
+        view.details.setText(objects.get(position).get("Activity").toString());
 
         return rowView;
     }

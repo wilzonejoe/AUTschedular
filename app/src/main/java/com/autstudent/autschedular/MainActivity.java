@@ -2,9 +2,8 @@ package com.autstudent.autschedular;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity
@@ -47,6 +48,16 @@ public class MainActivity extends AppCompatActivity
         TextView emailAddressTV = (TextView) header.findViewById(R.id.email_drawer);
         emailAddressTV.setText(emailAddress);
 
+        Fragment fragment = null;
+        Class fragmentClass = TodayView.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
     @Override
