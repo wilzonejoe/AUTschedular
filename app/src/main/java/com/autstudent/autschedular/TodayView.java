@@ -3,7 +3,6 @@ package com.autstudent.autschedular;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -54,7 +52,7 @@ public class TodayView extends Fragment {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, com.parse.ParseException e) {
-                CustomAdapter ca = new CustomAdapter(getContext(), R.layout.custom_row_layout, list);
+                ActivityCustomAdapter ca = new ActivityCustomAdapter(getContext(), R.layout.custom_row_layout, list);
                 ls.setAdapter(ca);
                 ls.setDivider(null);
                 pd.dismiss();

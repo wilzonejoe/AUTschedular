@@ -1,27 +1,33 @@
 package com.autstudent.autschedular;
 
-import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 
 import java.util.Calendar;
 import java.util.List;
 
+
+
 /**
  * Created by wilzo on 26/12/2015.
  */
-public class CustomAdapter extends ArrayAdapter {
+public class StreamArrayAdapter extends ArrayAdapter {
     private Context activity;
     private List<ParseObject> objects;
 
 
-    public CustomAdapter(Context context, int resource, List<ParseObject> objects) {
+    public StreamArrayAdapter(Context context, int resource, List<ParseObject> objects) {
         super(context, resource, objects);
         this.activity = context;
         this.objects= objects;
@@ -45,8 +51,42 @@ public class CustomAdapter extends ArrayAdapter {
         }
         /** Set data to your Views. */
 
-        String day = "Sunday";
-        int dayCode = Integer.parseInt(objects.get(position).get("Day").toString());
+
+        view.title.setText(objects.get(position).get("stream_code").toString());
+        final TextView detail = view.details;
+        ParseRelation<ParseObject> parseRelation = objects.get(position).getRelation("stream");
+        ParseQuery <ParseObject>parseQuery = parseRelation.getQuery();
+        parseQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if(e==null) {
+                    String details = "";
+                    boolean first = true;
+                    for (ParseObject o : list) {
+                        if(!first){
+                            details+="\n";
+                        }
+                        else{
+                            first = false;
+                        }
+                        details += getDate(Integer.parseInt(o.get("day").toString())) + " " + o.get("start").toString() + " - " + o.get("end").toString()+"\n \t" + o.get("room").toString();
+                    }
+                    detail.setText(details);
+                }
+            }
+        });
+
+        return rowView;
+    }
+
+
+    protected static class ViewHolder {
+        protected TextView title;
+        protected TextView details;
+    }
+
+    public static String getDate(int dayCode){
+        String day ="Sunday";
         switch (dayCode){
             case Calendar.MONDAY:
                 day = "Monday";
@@ -70,16 +110,6 @@ public class CustomAdapter extends ArrayAdapter {
                 day = "Sunday";
                 break;
         }
-
-        view.title.setText(day);
-        view.details.setText(objects.get(position).get("Activity").toString());
-
-        return rowView;
-    }
-
-
-    protected static class ViewHolder {
-        protected TextView title;
-        protected TextView details;
+        return day;
     }
 }

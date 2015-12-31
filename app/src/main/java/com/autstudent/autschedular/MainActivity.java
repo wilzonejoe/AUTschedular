@@ -1,5 +1,6 @@
 package com.autstudent.autschedular;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -113,6 +114,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
 
                 break;
+            case R.id.paper_descript:
+                Intent intent = new Intent(this,PaperDescription.class);
+                startActivity(intent);
+                return true;
             default:
                 fragmentClass = TodayView.class;
         }
