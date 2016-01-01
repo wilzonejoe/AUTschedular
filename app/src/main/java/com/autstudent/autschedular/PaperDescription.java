@@ -81,7 +81,7 @@ public class PaperDescription extends AppCompatActivity implements AdapterView.O
         }
 
         ListView ls = (ListView) findViewById(R.id.paper_stream_selector);
-        StreamArrayAdapter streamArrayAdapter = new StreamArrayAdapter(getApplicationContext(), R.layout.custom_row_layout, streams);
+        StreamArrayAdapter streamArrayAdapter = new StreamArrayAdapter(getApplicationContext(), R.layout.custom_paper_row_layout, streams);
         ls.setAdapter(streamArrayAdapter);
         pd.dismiss();
     }
