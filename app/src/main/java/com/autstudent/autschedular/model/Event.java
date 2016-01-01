@@ -16,12 +16,10 @@ public class Event extends ParseObject {
     public Event() { super(); }
 
     //Today View Methods
-    public String getTodayStartTime() {return getString(START);}
-    public String getTodayEndTime() {return getString(END);}
-
-    public String getTodayNote() {return getString(NOTE);}
-
-    public String getTodayRoom() {return getString(ROOM);}
+    public String getEventStartTime() {return getString(START);}
+    public String getEventEndTime() {return getString(END);}
+    public String getEventNote() {return getString(NOTE);}
+    public String getEventRoom() {return getString(ROOM);}
 
 
 
