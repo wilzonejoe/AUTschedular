@@ -1,5 +1,10 @@
 package com.autstudent.autschedular;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -24,9 +30,28 @@ public class MainActivity extends AppCompatActivity
     private static String userName = "USER";
     private static String emailAddress = "USER@ALIBABA.com";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+        //check if ran today view once since installation
+        SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        if(pref.getBoolean("today_view_exe", false) == false){
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean("today_view_exe", true);
+            ed.apply();
+            Toast.makeText(this, "first time today loaded",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "* time today loaded",
+                    Toast.LENGTH_LONG).show();
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

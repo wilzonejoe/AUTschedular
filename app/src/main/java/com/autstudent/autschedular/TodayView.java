@@ -1,7 +1,10 @@
 package com.autstudent.autschedular;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -32,6 +35,8 @@ public class TodayView extends Fragment {
     private ProgressDialog pd;
     final private String DAY = "Day";
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +53,9 @@ public class TodayView extends Fragment {
             }
         });
 
+        SharedPreferences pref = getActivity().getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+
+
         pd = new ProgressDialog(getActivity());
         pd.setMessage("Loading...");
         pd.setCancelable(false);
@@ -57,10 +65,7 @@ public class TodayView extends Fragment {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Test");
         query.whereEqualTo(DAY, day + "");
 
-        if(query.hasCachedResult())
-        {
-            query.fromLocalDatastore();
-        }
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(final List<ParseObject> list, com.parse.ParseException e) {
