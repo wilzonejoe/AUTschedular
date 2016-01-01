@@ -1,9 +1,12 @@
 package com.autstudent.autschedular;
 
-import android.support.v4.app.Fragment;
+import android.app.Activity;
+import android.app.TaskStackBuilder;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,8 +18,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import com.parse.FindCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import java.text.ParseException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +37,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,16 +64,16 @@ public class MainActivity extends AppCompatActivity
         TextView emailAddressTV = (TextView) header.findViewById(R.id.email_drawer);
         emailAddressTV.setText(emailAddress);
 
-        Fragment fragment = null;
-        Class fragmentClass = TodayView.class;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Test");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, com.parse.ParseException e) {
+                for (ParseObject o : list){
+                    Log.d("name",o.get("name").toString());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -96,35 +112,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment = null;
+        if (id == R.id.nav_today) {
+            // Handle the camera action
+        } else if (id == R.id.nav_week) {
 
-        Class fragmentClass = TodayView.class;
+        } else if (id == R.id.nav_option) {
 
-        switch (id){
-            case R.id.nav_today:
-                fragmentClass = TodayView.class;
-                break;
-            case R.id.nav_week:
-                fragmentClass = WeekView.class;
-                break;
-            case R.id.nav_option:
+        } else if (id == R.id.nav_logout) {
 
-                break;
-            case R.id.nav_logout:
-
-                break;
-            default:
-                fragmentClass = TodayView.class;
         }
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
