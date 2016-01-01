@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -44,16 +45,18 @@ public class TodayView extends Fragment {
         });
 
         pd = new ProgressDialog(getActivity());
-        pd.setMessage("Loading.....");
+        pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Test");
-        query.whereEqualTo("Day",day+"");
+        query.whereEqualTo("Day", day+"");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, com.parse.ParseException e) {
+
+
                 CustomAdapter ca = new CustomAdapter(getContext(), R.layout.custom_row_layout, list);
                 ls.setAdapter(ca);
                 ls.setDivider(null);
