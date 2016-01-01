@@ -1,26 +1,30 @@
 package com.autstudent.autschedular;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by wilzo on 26/12/2015.
  */
 public class CustomAdapter extends ArrayAdapter {
-    private Activity activity;
-    private List<String> title;
+    private Context activity;
+    private List<ParseObject> objects;
 
 
-    public CustomAdapter(Activity context, int resource, List<String> Title) {
-        super(context, resource, Title);
+    public CustomAdapter(Context context, int resource, List<ParseObject> objects) {
+        super(context, resource, objects);
         this.activity = context;
-        this.title = Title;
+        this.objects= objects;
     }
 
     @Override
@@ -29,7 +33,7 @@ public class CustomAdapter extends ArrayAdapter {
         ViewHolder view;
         if (rowView == null) {
             // Get a new instance of the row layout view
-            LayoutInflater inflater = activity.getLayoutInflater();
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(R.layout.custom_row_layout, null);
             // Hold the view objects in an object, that way the don't need to be "re- finded"
             view = new ViewHolder();
@@ -41,8 +45,34 @@ public class CustomAdapter extends ArrayAdapter {
         }
         /** Set data to your Views. */
 
-        view.title.setText(title.get(position));
-        view.details.setText(title.get(position));
+        String day = "Sunday";
+        int dayCode = Integer.parseInt(objects.get(position).get("Day").toString());
+        switch (dayCode){
+            case Calendar.MONDAY:
+                day = "Monday";
+                break;
+            case Calendar.TUESDAY:
+                day = "Tuesday";
+                break;
+            case Calendar.WEDNESDAY:
+                day = "Wednesday";
+                break;
+            case Calendar.THURSDAY:
+                day = "Thursday";
+                break;
+            case Calendar.FRIDAY:
+                day = "Friday";
+                break;
+            case Calendar.SATURDAY:
+                day = "Saturday";
+                break;
+            case Calendar.SUNDAY:
+                day = "Sunday";
+                break;
+        }
+
+        view.title.setText(day);
+        view.details.setText(objects.get(position).get("Activity").toString());
 
         return rowView;
     }
