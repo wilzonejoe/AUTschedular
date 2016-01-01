@@ -57,18 +57,22 @@ public class TodayView extends Fragment {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Test");
         query.whereEqualTo(DAY, day + "");
 
-        query.fromLocalDatastore();
+        if(query.hasCachedResult())
+        {
+            query.fromLocalDatastore();
+        }
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(final List<ParseObject> list, com.parse.ParseException e) {
                 if (e != null) {
                     Log.d("testing_inital_query", "could not fetch event data");
-                } else {
-                    CustomAdapter ca = new CustomAdapter(getContext(), R.layout.custom_row_layout, list);
-                    ls.setAdapter(ca);
-                    ls.setDivider(null);
-                    pd.dismiss();
+                    return;
                 }
+                CustomAdapter ca = new CustomAdapter(getContext(), R.layout.custom_row_layout, list);
+                ls.setAdapter(ca);
+                ls.setDivider(null);
+                pd.dismiss();
+
 
                 //releases objects previously pinned
                 ParseObject.unpinAllInBackground(DAY, list, new DeleteCallback() {
