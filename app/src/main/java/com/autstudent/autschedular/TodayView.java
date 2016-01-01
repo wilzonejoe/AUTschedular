@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -33,8 +34,8 @@ import java.util.List;
 public class TodayView extends Fragment {
 
     private ProgressDialog pd;
-    final private String DAY = "Day";
 
+    final private String DAY = "Day";
 
 
     @Nullable
@@ -53,8 +54,19 @@ public class TodayView extends Fragment {
             }
         });
 
+//check if ran today view once since installation
         SharedPreferences pref = getActivity().getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
-
+        if(pref.getBoolean("today_view_exe", false) == false){
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean("today_view_exe", true);
+            ed.apply();
+            Toast.makeText(getContext(), "first time today loaded",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getContext(), "* time today loaded",
+                    Toast.LENGTH_LONG).show();
+        }
 
         pd = new ProgressDialog(getActivity());
         pd.setMessage("Loading...");

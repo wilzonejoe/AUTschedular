@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
 
-
+        /*
         //check if ran today view once since installation
         SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
         if(pref.getBoolean("today_view_exe", false) == false){
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         else {
             Toast.makeText(this, "* time today loaded",
                     Toast.LENGTH_LONG).show();
-        }
+        }*/
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
