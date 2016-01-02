@@ -16,12 +16,12 @@ import java.util.List;
 /**
  * Created by wilzo on 26/12/2015.
  */
-public class CustomAdapter extends ArrayAdapter {
+public class ActivityCustomAdapter extends ArrayAdapter {
     private Context activity;
     private List<ParseObject> objects;
 
 
-    public CustomAdapter(Context context, int resource, List<ParseObject> objects) {
+    public ActivityCustomAdapter(Context context, int resource, List<ParseObject> objects) {
         super(context, resource, objects);
         this.activity = context;
         this.objects= objects;

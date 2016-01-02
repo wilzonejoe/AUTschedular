@@ -1,9 +1,11 @@
 package com.autstudent.autschedular;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -20,7 +23,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,7 +32,9 @@ import java.util.List;
 public class TodayView extends Fragment {
 
     private ProgressDialog pd;
+
     final private String DAY = "Day";
+
 
     @Nullable
     @Override
@@ -48,6 +52,20 @@ public class TodayView extends Fragment {
             }
         });
 
+//check if ran today view once since installation
+        SharedPreferences pref = getActivity().getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        if(pref.getBoolean("today_view_exe", false) == false){
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean("today_view_exe", true);
+            ed.apply();
+            Toast.makeText(getContext(), "first time today loaded",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getContext(), "* time today loaded",
+                    Toast.LENGTH_LONG).show();
+        }
+
         pd = new ProgressDialog(getActivity());
         pd.setMessage("Loading...");
         pd.setCancelable(false);
@@ -57,18 +75,20 @@ public class TodayView extends Fragment {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Test");
         query.whereEqualTo(DAY, day + "");
 
-        if(query.hasCachedResult())
-        {
-            query.fromLocalDatastore();
-        }
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
+<<<<<<< HEAD
+            public void done(List<ParseObject> list, com.parse.ParseException e) {
+                ActivityCustomAdapter ca = new ActivityCustomAdapter(getContext(), R.layout.custom_row_layout, list);
+=======
             public void done(final List<ParseObject> list, com.parse.ParseException e) {
                 if (e != null) {
                     Log.d("testing_inital_query", "could not fetch event data");
                     return;
                 }
                 CustomAdapter ca = new CustomAdapter(getContext(), R.layout.custom_row_layout, list);
+>>>>>>> master
                 ls.setAdapter(ca);
                 ls.setDivider(null);
                 pd.dismiss();

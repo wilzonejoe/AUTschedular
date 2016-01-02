@@ -10,4 +10,5 @@
     <string name="option">Option</string>
     <string name="logout">Logout</string>
     <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_paper_description">PaperDescription</string>
 </resources>
