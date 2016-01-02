@@ -1,14 +1,12 @@
 package com.autstudent.autschedular;
 
-<<<<<<< HEAD
+
 import android.content.Intent;
-=======
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
->>>>>>> master
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
