@@ -11,4 +11,17 @@
     <string name="logout">Logout</string>
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_paper_description">PaperDescription</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_repeat">repeat</string>
+    <string name="day">Day</string>
+    <string name="title">Title</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="reminder">Reminder</string>
+    <string name="day_title">Day :</string>
+    <string name="title_title">Title :</string>
+    <string name="time_title">Time :</string>
+    <string name="reminder_title">Reminder :</string>
+    <string name="date_title">Date :</string>
 </resources>

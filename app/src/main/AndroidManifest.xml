@@ -32,17 +32,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/title_activity_add"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.autstudent.autschedular.MainActivity" />
-        </activity>
-        <activity
             android:name=".PaperDescription"
             android:label="@string/title_activity_paper_description"
             android:parentActivityName=".MainActivity"
@@ -51,6 +40,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.autstudent.autschedular.MainActivity" />
         </activity>
+        <activity
+            android:name=".AddActivity"
+            android:label="@string/title_activity_add"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.autstudent.autschedular.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/title_activity_edit"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.autstudent.autschedular.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Repeat"
+            android:label="@string/title_activity_repeat"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
