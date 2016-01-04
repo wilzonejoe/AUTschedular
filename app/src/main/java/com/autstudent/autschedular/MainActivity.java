@@ -86,6 +86,20 @@ public class MainActivity extends AppCompatActivity
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
+
+        goToTodayView();
+    }
+
+    //use this when enter the program
+    public void goToTodayView(){
+        mWeekView.goToToday();
+        mWeekViewType = TYPE_DAY_VIEW;
+        mWeekView.setNumberOfVisibleDays(1);
+
+        // Lets change some dimensions to best fit the view.
+        mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
+        mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+        mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
     }
 
     @Override
@@ -113,7 +127,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        switch (id){
+        switch (id) {
             case R.id.add_activity:
                 Intent intent = new Intent(this, AddActivity.class);
                 startActivity(intent);
