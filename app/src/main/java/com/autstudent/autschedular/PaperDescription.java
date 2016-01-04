@@ -33,7 +33,6 @@ public class PaperDescription extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_paper_description);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         papers = new ArrayList<>();

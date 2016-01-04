@@ -7,9 +7,15 @@
             android:icon="@drawable/ic_calender_today"
             android:title="@string/today_schedule" />
         <item
+            android:id="@+id/nav_three"
+            android:icon="@drawable/ic_calender_week"
+            android:title="@string/three_day_schedule" />
+
+        <item
             android:id="@+id/nav_week"
             android:icon="@drawable/ic_calender_week"
             android:title="@string/week_schedule" />
+
         <item
             android:id="@+id/paper_descript"
             android:icon="@android:drawable/stat_sys_upload_done"
