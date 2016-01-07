@@ -216,21 +216,62 @@ public class MainActivity extends AppCompatActivity
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
+        int colorInt = 1;
+        int startHourOfDay = 0;
+        int startMinuteOfDay = 0;
+        int month = 0;
+        int year = 0;
+
+        String title = "Math Lecture";
+
+        /*
+        * while loop events from parse
+        * get random color change every iteration
+        * get title of event
+        * get start time
+        * get end time
+        * get month
+        * get year
+        *
+        * Create Calendar object for start
+        * Create Calendar object for end
+        * set title of event
+        * set start time
+        * set end time
+        * set month
+        * set year
+        *
+        * create weekViewEvent object
+        * WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
+        * add arguments
+        *
+        * set color
+        * events.add(event);
+        * */
+
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+
+
 
         Calendar startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 3);
         startTime.set(Calendar.MINUTE, 0);
         startTime.set(Calendar.MONTH, newMonth - 1);
         startTime.set(Calendar.YEAR, newYear);
+
         Calendar endTime = (Calendar) startTime.clone();
         endTime.add(Calendar.HOUR, 1);
         endTime.set(Calendar.MONTH, newMonth - 1);
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
+
+        WeekViewEvent event = new WeekViewEvent(1, title + " "  + getEventTime(startTime), startTime, endTime);
         event.setColor(getResources().getColor(R.color.event_color_01));
         events.add(event);
 
+
+
+
+        /*
         startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 3);
         startTime.set(Calendar.MINUTE, 30);
@@ -241,11 +282,11 @@ public class MainActivity extends AppCompatActivity
         endTime.set(Calendar.MINUTE, 30);
         endTime.set(Calendar.MONTH, newMonth - 1);
         event = new WeekViewEvent(10, getEventTitle(startTime), startTime, endTime);
-        event.setColor(getResources().getColor(R.color.event_color_02));
+        event.setColor(getResources().getColor(R.color.event_color_01));
         events.add(event);
 
         startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 4);
+        startTime.set(Calendar.HOUR_OF_DAY, 3);
         startTime.set(Calendar.MINUTE, 20);
         startTime.set(Calendar.MONTH, newMonth - 1);
         startTime.set(Calendar.YEAR, newYear);
@@ -253,11 +294,11 @@ public class MainActivity extends AppCompatActivity
         endTime.set(Calendar.HOUR_OF_DAY, 5);
         endTime.set(Calendar.MINUTE, 0);
         event = new WeekViewEvent(10, getEventTitle(startTime), startTime, endTime);
-        event.setColor(getResources().getColor(R.color.event_color_03));
+        event.setColor(getResources().getColor(R.color.event_color_01));
         events.add(event);
 
         startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 5);
+        startTime.set(Calendar.HOUR_OF_DAY, 3);
         startTime.set(Calendar.MINUTE, 30);
         startTime.set(Calendar.MONTH, newMonth - 1);
         startTime.set(Calendar.YEAR, newYear);
@@ -269,7 +310,7 @@ public class MainActivity extends AppCompatActivity
         events.add(event);
 
         startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 5);
+        startTime.set(Calendar.HOUR_OF_DAY, 3);
         startTime.set(Calendar.MINUTE, 0);
         startTime.set(Calendar.MONTH, newMonth - 1);
         startTime.set(Calendar.YEAR, newYear);
@@ -315,13 +356,18 @@ public class MainActivity extends AppCompatActivity
         endTime.add(Calendar.HOUR_OF_DAY, 3);
         event = new WeekViewEvent(5, getEventTitle(startTime), startTime, endTime);
         event.setColor(getResources().getColor(R.color.event_color_02));
-        events.add(event);
+        events.add(event);*/
 
         return events;
     }
 
     private String getEventTitle(Calendar time) {
         return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
+    }
+
+    //used in week view for displaying the time title of event
+    private String getEventTime(Calendar time) {
+        return String.format("Event of %01d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
     }
 
     @Override
