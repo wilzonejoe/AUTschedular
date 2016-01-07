@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,14 +13,14 @@
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="0.10"/>
+            android:layout_weight="0.10" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_marginTop="@dimen/app_bar_height"
             android:layout_weight="0.8"
-            android:layout_marginTop="@dimen/app_bar_height">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -48,13 +48,15 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/title_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title"
                         android:textSize="@dimen/font_edit_small" />
                 </LinearLayout>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/edit_title"
                     android:layout_width="@dimen/icon_edit_small"
                     android:layout_height="@dimen/icon_edit_small"
                     android:layout_alignParentEnd="true"
@@ -73,17 +75,17 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/day_icon"
+                    android:id="@+id/date_icon"
                     android:layout_width="@dimen/icon_edit_large"
                     android:layout_height="@dimen/icon_edit_large"
-                    android:src="@drawable/ic_action_day"
+                    android:src="@drawable/ic_action_calendar"
                     android:tint="@color/colorBlack" />
 
                 <LinearLayout
-                    android:id="@+id/day_texts"
+                    android:id="@+id/date_texts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/day_icon"
+                    android:layout_toRightOf="@+id/date_icon"
                     android:orientation="vertical">
 
                     <TextView
@@ -94,13 +96,15 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/date_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/date"
                         android:textSize="@dimen/font_edit_small" />
                 </LinearLayout>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/edit_date"
                     android:layout_width="@dimen/icon_edit_small"
                     android:layout_height="@dimen/icon_edit_small"
                     android:layout_alignParentEnd="true"
@@ -139,20 +143,68 @@
                         android:textSize="@dimen/font_edit_large"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/time"
-                        android:textSize="@dimen/font_edit_small" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/start_time_texts_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_time_title"
+                            android:textSize="@dimen/font_edit_small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/start_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/start_time_texts_title"
+                            android:text="@string/start_time"
+                            android:textSize="@dimen/font_edit_small" />
+
+                        <ImageButton
+                            android:id="@+id/edit_start_time"
+                            android:layout_width="@dimen/icon_edit_small"
+                            android:layout_height="@dimen/icon_edit_small"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_action_pencil"
+                            android:tint="@color/colorAccent" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/end_time_texts_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/end_time_title"
+                            android:textSize="@dimen/font_edit_small"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/end_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/end_time_texts_title"
+                            android:text="@string/end_time"
+                            android:textSize="@dimen/font_edit_small" />
+
+                        <ImageButton
+                            android:id="@+id/edit_end_time"
+                            android:layout_width="@dimen/icon_edit_small"
+                            android:layout_height="@dimen/icon_edit_small"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_action_pencil"
+                            android:tint="@color/colorAccent" />
+                    </RelativeLayout>
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="@dimen/icon_edit_small"
-                    android:layout_height="@dimen/icon_edit_small"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_action_pencil"
-                    android:tint="@color/colorAccent" />
+
             </RelativeLayout>
 
             <View
@@ -185,14 +237,28 @@
                         android:textSize="@dimen/font_edit_large"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/reminder"
-                        android:textSize="@dimen/font_edit_small" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/reminder_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/reminder"
+                            android:textSize="@dimen/font_edit_small" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" min"
+                            android:textSize="@dimen/font_edit_small" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/edit_reminder"
                     android:layout_width="@dimen/icon_edit_small"
                     android:layout_height="@dimen/icon_edit_small"
                     android:layout_alignParentEnd="true"
@@ -201,13 +267,19 @@
                     android:tint="@color/colorAccent" />
             </RelativeLayout>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:id="@+id/save_button"
+                android:text="save"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="0.10"/>
+            android:layout_weight="0.10" />
 
     </LinearLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
