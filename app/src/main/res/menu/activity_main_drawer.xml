@@ -15,12 +15,6 @@
             android:id="@+id/nav_week"
             android:icon="@drawable/ic_calender_week"
             android:title="@string/week_schedule" />
-
-        <item
-            android:id="@+id/paper_descript"
-            android:icon="@android:drawable/stat_sys_upload_done"
-            android:title="paper descipt"/>
-
     </group>
 
     <item android:title="Option">

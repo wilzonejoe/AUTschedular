@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,7 +56,6 @@ public class AddActivity extends AppCompatActivity {
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-//        tabLayout.addTab(tabLayout.newTab().setText("Repeat"));
         tabLayout.addTab(tabLayout.newTab().setText("Schedule"));
         tabLayout.addTab(tabLayout.newTab().setText("Class"));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -76,6 +76,18 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -101,11 +113,11 @@ public class AddActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
 
             switch (sectionNumber) {
-//                case 1:
-//                    fragment = new Repeat();
-//                    break;
                 case 1:
-                    fragment = new Schedule();
+                    fragment = new AddSchedule();
+                    break;
+                case 2:
+                    fragment = new AddClass();
                     break;
                 default:
                     Bundle args = new Bundle();
@@ -154,7 +166,7 @@ public class AddActivity extends AppCompatActivity {
                 case 0:
                     return "Schedule";
                 case 1:
-                    return "SECTION 1";
+                    return "Class";
             }
             return null;
         }
