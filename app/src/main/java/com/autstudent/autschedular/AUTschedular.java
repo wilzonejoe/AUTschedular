@@ -3,6 +3,7 @@ package com.autstudent.autschedular;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 /**
  * Created by wilzo on 24/12/2015.
