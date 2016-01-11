@@ -292,6 +292,8 @@ public class MainActivity extends AppCompatActivity
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
         for (ParseObject ob : schedule) {
@@ -304,6 +306,7 @@ public class MainActivity extends AppCompatActivity
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
 
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
@@ -334,6 +337,11 @@ public class MainActivity extends AppCompatActivity
 
     private String getEventTitle(Calendar time, String title) {
         return String.format(title + "\n%02d:%02d\n%s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
+    }
+
+    //used in week view for displaying the time title of event
+    private String getEventTime(Calendar time) {
+        return String.format("Event of %01d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
     }
 
     @Override

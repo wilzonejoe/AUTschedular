@@ -35,5 +35,4 @@ public class DetailsActivity extends AppCompatActivity {
             titleTv.setText(ob.get("Title").toString());
         }
     }
-
 }
