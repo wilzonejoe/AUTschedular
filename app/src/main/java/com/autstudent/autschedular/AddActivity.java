@@ -133,10 +133,8 @@ public class AddActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_add, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
+
+            return super.onCreateView(inflater,container,savedInstanceState);
         }
     }
 
@@ -169,9 +167,9 @@ public class AddActivity extends AppCompatActivity {
                 case 0:
                     return "Repeat";
                 case 1:
-                    return "SECTION 2";
+                    return "Schedule";
                 case 2:
-                    return "SECTION 3";
+                    return "Class";
             }
             return null;
         }
